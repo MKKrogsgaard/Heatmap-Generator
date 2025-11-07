@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>FIT file analyzer</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="style.css">
+        <!--Get the "Roboto" foint from Google Fonts-->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+        <!--Get plotly.js from the Fastly CDN-->
+        <script src="https://cdn.plot.ly/plotly-3.1.0.min.js" charset="utf-8"></script>
+        <!--Get jQuery from googles CDN-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <!--Reference to jQuery functions-->
+        <script src="src/jquery_functions.js"></script>
+        <!--Reference to other JS code-->
+        <script src="src/main.js"></script>
+    </head>
+    <body>
+        <div class="file-upload">
+            <!--This button triggers the file upload input below when clicked (opens the filer chooser, as if the user clicked the input field)-->
+            <button class="file-upload-button" onclick="$('.file-upload-input').trigger('click')">Upload FIT file</button>
+            <div class="file-upload-wrapper">
+                <input class="file-upload-input" type="file" onchange="readURL(this);" accept=".fit"/>
+                <div class="drag-file-text">
+                    <div class="drag-text">
+                        <h3>Drag and and drop a .fit file or click "upload .fit file"</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
