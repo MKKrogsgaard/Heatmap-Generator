@@ -20,7 +20,6 @@ app = express();
 // These lines are needed to populate the request.body object with the submitted inputs
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }));
-
 // Tell express which static files to serve
 app.use(express.static('public'))
 
@@ -30,9 +29,11 @@ app.get('/', function(request, response) {
 });
 
 // Call handleFileUpload() if we recieve a POST request to the uploads folder
-app.post('/uploads', handleFileUpload);
+app.post('/uploads', upload.array('files'), handleFileUpload);
 function handleFileUpload(request, response) {
-    console.log(request, response)
+    console.log(request.body);
+    console.log(request.files);
+    response.json({message: 'Successfully uploaded files'});
 }
 
 // Start the server on some port
