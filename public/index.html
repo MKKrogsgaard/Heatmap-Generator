@@ -7,10 +7,14 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!--Reference to css stylesheet-->
         <link rel="stylesheet" href="style.css">
+
         <!--Get the "Roboto" foint from Google Fonts-->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+
+        <!--Reference to Leaflet CSS file-->
+         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
     </head>
     <body>
         <div class="file-upload-container">
@@ -18,7 +22,7 @@
                 <!--This button triggers the file upload input below when clicked (opens the filer chooser, as if the user clicked the input field)-->
                 <button type="button" class="file-upload-button" onclick="$('#file-upload-input').trigger('click')">Upload FIT file</button>
                 <div class="file-upload-wrapper">
-                    <input id="file-upload-input" class="file-upload-input" type="file" accept=".fit"/>
+                    <input id="file-upload-input" class="file-upload-input" type="file" multiple accept=".fit"/>
                     <div class="drag-file-text">
                         <div class="drag-text">
                             <h3>Drag and and drop a .fit file or click "upload .fit file"</h3>
@@ -27,13 +31,19 @@
                 </div>
             </form>
         </div>
-        <!--Get plotly.js from the Fastly CDN-->
-        <script src="https://cdn.plot.ly/plotly-3.1.0.min.js" charset="utf-8"></script>
+        <!--Map container for the Leafly map-->
+        <div id="map" class="leafly-map-container"></div>
+
         <!--Get jQuery from googles CDN-->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-        <!--Reference to jQuery functions-->
+        <!--Reference to script defining jQuery functions-->
         <script src="scripts/jquery_functions.js"></script>
+
         <!--Reference to other JS code-->
         <script src="scripts/main.js"></script>
+        
+        <!--Reference to Leaflet and Leaflet.heat-->
+        <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+        <script src="https://unpkg.com/leaflet.heat@0.2.0/dist/leaflet-heat.js"></script>
     </body>
 </html>

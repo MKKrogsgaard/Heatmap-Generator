@@ -1,5 +1,5 @@
 /*
-DESCRIPTION: Contains functions for parsing a raw .fit file and for extracting GPS points from it
+DESCRIPTION: Contains functions for parsing a raw .fit file and for extracting GPS points from its records
 */
 
 // Imports
@@ -51,32 +51,37 @@ function parseFitFile(filepath) {
  * @param {<object>} data - A (raw) parsed .fit file, the object returned by the parseFitFile() parser
  * @returns {<Array>{lat:number, long:number, timestamp?:string, altitude?: number, heart_rate?:number}} - Array containing GPS points and some supplementary info
  */
-function getGpsPoints(data, filepath) {
+function getGpsPoints(data) {
+    /* 
+    We the data we are interested in are located in 
+    {data} -> {activity} -> [sessions] -> {ith session} -> [laps] -> {jth lap}
 
-    // TODO: Make this work with the insanely complicated structure of the parsed fit data
-    jsondata = JSON.stringify(data);
-    fs.writeFile(filepath +'json.txt', jsondata, (err) => {
-        console.error(err);
-    });
-    
-    // const points = [];
-    // if (Array.isArray(data.activity.events)) {
-    //     for (const event of data.activity.events) {
-    //         if (typeof event.position_lat !== 'undefined' && typeof event.position_long !== 'undefined') { // Make sure the current record actually contains position data
-    //             points.push({
-    //                 lat: semicirclesToDeg(event.position_lat),
-    //                 long: semicirclesToDeg(event.position_long)
-    //                 // timestamp: event.timeStamp || null,
-    //                 // altitude: event.altitude || null,
-    //                 // heart_rate: event.heart_rate || null
-    //             });
-    //         }
-    //     }
-    //     return points;
-    // } else {
-    //     console.error('getGpsPoints failed or no records in .fit file');
-    //     return data.activity.events;
-    // }
+    The structure of the parsed data is confusing AF 
+    TODO: Include some kind of illustration of the structure in the repo
+    */
+    const points = [];
+    sessions = data.activity.sessions;
+
+    // This is kind of ugly, maybe find some way to NOT make this a triple for loop? :P
+    // Loop through the sessions, and the laps within each session, and extract the data we want
+    for (const session of sessions) {
+        const laps = session.laps;
+        for (const lap of laps) {
+            for (const record of lap.records) {
+                if (typeof record.position_lat !== 'undefined' && typeof record.position_long !== 'undefined') { // Make sure the current record actually contains position data
+                points.push({
+                    lat: semicirclesToDeg(record.position_lat),
+                    long: semicirclesToDeg(record.position_long),
+                    timestamp: record.timeStamp || null,
+                    altitude: record.altitude || null,
+                    heart_rate: record.heart_rate || null
+                });
+            }
+            }
+        }
+    }
+
+    return points;
 }
 
 module.exports = {

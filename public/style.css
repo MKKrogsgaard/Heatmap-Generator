@@ -94,3 +94,8 @@ body{
     border: var(--border-radius) dashed var(--color-accent-darkened);
 }
 
+/* Leafly map */
+#map {
+    height: 100%;
+    width: 100%;
+}

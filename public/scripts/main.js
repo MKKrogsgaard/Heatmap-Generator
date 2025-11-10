@@ -15,7 +15,7 @@ function submitFiles(input) {
         files = input.files;
     }
     else {
-        console.warn('submitFiles: No files found in argument', input);
+        console.error('submitFiles: No files found in argument', input);
     }
 
     // Append files to FormData object in order to pass it to Multer
@@ -34,3 +34,15 @@ function submitFiles(input) {
     .catch((err) => console.error('An error ocurred', err))
 }
 
+/**
+ * Takes in GPS points and makes a heatmap
+ * @param {<Array>} runs - An array where each entry is the set of points associated with a run
+ */
+function makeHeatMap(runs) {
+    // Extract all of the GPS points from the runs
+    const points = [];
+    // Initialize heatmap centered on the first point
+    const map = L.map('map', {
+
+    });
+}
