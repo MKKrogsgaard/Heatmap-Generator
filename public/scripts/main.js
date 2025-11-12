@@ -1,4 +1,3 @@
-
 /**
  * Extends this Array with other_array in-place by pushing each element of other_array to this Array.
  * @param {<Array>} other_array - The array with which to extend this array

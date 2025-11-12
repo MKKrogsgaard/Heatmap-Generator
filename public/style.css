@@ -23,14 +23,23 @@
 body{
     font-family: "Roboto";
     background: var(--c-primary);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    margin: 0; /* remove default body margin that can create gaps */
+}
+
+.content {
+    flex: 1;
 }
 
 /* Wrapper for file upload fields */
 .file-upload-container {
     background-color: var(--color-ui);
     width: 600px;
-    margin: 0 auto;
+    margin: 20px auto;
     padding: 20px;
+    border-radius: 6px;
 }
 
 /* File upload button */
@@ -94,20 +103,35 @@ body{
     border: var(--border-radius) dashed var(--color-accent-darkened);
 }
 
-/* Leafly map */
+/* Leaflet map */
 .map-container {
-    height: 550px;
-    width: 550px;
-    margin: 24px auto;
+    height: 400px;
+    width: 620px;
+    padding: 10px;
+    margin: 20px auto;
     border-radius: 6px;
     background-color: var(--color-accent);
 }
 
 #map {
+    text-align: center;
+    font-weight: 100;
+    text-transform: uppercase;
+    color: var(--color-primary);
     margin: auto;
-    position: relative;
+    position: sticky;
     top: 50%;
-    transform: translateY(-50%);
-    height: 525px;
-    width: 525px;
+    height: 400px;
+    width: 620px;
+}
+
+/* Single-line footer */
+.footer-single-line {
+    background-color: var(--color-accent-darkened);
+    color: var(--color-primary);
+    border-top: 1px solid var(--color-seconday);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
 }
