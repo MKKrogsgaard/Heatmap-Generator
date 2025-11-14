@@ -18,7 +18,18 @@ Array.prototype.extend = function extend(other_array) {
     });
 }
 
+// OSM tile usage compliance
+const OSM_TILE_URL = 'https://tile.openstreetmap.org/{z}/{x}/{y}.png';
+const OSM_TILE_ATTRIBUTION = '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>';
+
+// Global reference to map and heatmap
+let leafletMap = null;
+let heatLayer = null;
+
 function submitFiles(input) {
+    //Show loader
+    $('#loader').removeClass('hide');
+    $('#content').addClass('hide')
     /**
      * Accepts either a filelist or an <input> element with a .files attribute.
      */
@@ -68,15 +79,16 @@ function submitFiles(input) {
                 }
             }
         });
-        // Log invalid points for debugging
+        // For debugging
         percentage_valid = validPoints.length / (validPoints.length + invalidPoints.length) * 100
         console.log(`Number of valid points: ${validPoints.length} (${percentage_valid}%)`);
-        console.log('Valid points', validPoints)
-        console.log(`Number of invalid points: ${invalidPoints.length} (${100 - percentage_valid}%)`);
-        console.log('Invalid points', invalidPoints);
 
         // Make the heatmap with the valid points
         makeHeatMap(validPoints);
+
+        // Get rid of the loader
+        $('#loader').addClass('hide');
+        $('#content').removeClass('hide')
     });
 }
 
@@ -90,22 +102,34 @@ function makeHeatMap(points) {
         console.error('makeHeatMap: No points provided, or points not an Array!');
     }
 
-    // Initialize map centered on the first point
-    console.log('Initial map center: ', [points[0][0], points [0][1]]);
-    const map = L.map('map', {
-        center: [points[0][0], points [0][1]],
-        zoom: 10
+    // Remove the existing map, if present
+    if (leafletMap != null) {  
+        try {
+            leafletMap.remove();
+        } catch (err) {
+            console.error(err);
+        }
+    }
+
+    // Initialize map centered on a random point from the data
+    initial_center = points[Math.floor(Math.random()*points.length)];
+    console.log('Initial map center: ', [initial_center[0], initial_center[1]]);
+
+    leafletMap = L.map('map', {
+        center: [initial_center[0], initial_center[1]],
+        zoom: 11
     });
-    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+
+    L.tileLayer(OSM_TILE_URL, {
         maxZoom: 19,
-        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-    }).addTo(map);
+        attribution: OSM_TILE_ATTRIBUTION
+    }).addTo(leafletMap);
     console.log('Leaflet map initialized!');
 
     // Add heatmap layer
-    let heat = L.heatLayer(points, {
+    heatLayer = L.heatLayer(points, {
         radius: 5,
         blur: 5
-    }).addTo(map);
+    }).addTo(leafletMap);
     console.log('Heatmap drawn!');
 }

@@ -1,5 +1,6 @@
 // Only run these when the page has finished loading
 $(document).ready(function(){
+    $('#loader').addClass('hide');
     // Global variables
 
     // Add/remove file dropping styling to the file upload field if the user is hovering over it with a file in hand

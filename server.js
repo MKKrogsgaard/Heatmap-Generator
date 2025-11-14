@@ -57,7 +57,6 @@ async function handleFileUpload(request, response) {
     
     const parsePromises = filenames.map(async filename => {
         const filepath = path.join(__dirname + '/uploads', filename);
-        console.log(`Currently parsing ${filepath}`);
         try {
             const parsedData = await parseFitFile(filepath); // Raw parsed .fit file object
             const points = getGpsPoints(parsedData, filepath); // Simplified array of points

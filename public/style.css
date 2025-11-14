@@ -1,17 +1,17 @@
 /* Global variables */
 :root {
     /* Color palette */
-    --color-primary: #e0fbfc;
+    --color-primary: #faf0ca;
 
-    --color-seconday: #9db4c0;
-    --color-seconday-brightened: #aac2cf;
-    --color-seconday-darkened: #8b9faa;
+    --color-seconday: #f4d35e;
+    --color-seconday-brightened: #ffdd63;
+    --color-seconday-darkened: #dfc157;
 
-    --color-accent: #253237;
-    --color-accent-brightened: #314249;
-    --color-accent-darkened: #192225;
+    --color-accent: #0d3b66;
+    --color-accent-brightened: #10487e;
+    --color-accent-darkened: #0a2b4b;
 
-    --color-ui: #c2dfe3;
+    --color-ui: #f4d35e;
 
     --color-light: #bfc0c0;
 
@@ -32,6 +32,11 @@ body{
 .content {
     flex: 1;
 }
+
+.content.hide {
+    opacity: 0.5;
+}
+
 
 /* Wrapper for file upload fields */
 .file-upload-container {
@@ -129,9 +134,61 @@ body{
 .footer-single-line {
     background-color: var(--color-accent-darkened);
     color: var(--color-primary);
-    border-top: 1px solid var(--color-seconday);
+    border-top: 5px solid var(--color-seconday);
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 10px;
+    padding: 5px;
 }
+.footer-single-line-link {
+  color: var(--color-seconday);
+  background-color: transparent;
+  text-decoration: none;
+}
+.footer-single-line-link:hover {
+  color: var(--color-seconday-brightened);
+  background-color: transparent;
+  text-decoration: underline;
+}
+.footer-single-line-link:active {
+  color: var(--color-accent-brightened);
+  background-color: transparent;
+  text-decoration: underline;
+}
+
+
+/* Spinner loader */
+.loader {
+    --spinner-size: 120px;
+
+    /* Centering on top of content */
+    position: fixed;
+    /* Adjusts for the size of the spinner to center it visually*/
+    top: calc(50% - 0.5*var(--spinner-size));
+    left: calc(50% - 0.5*var(--spinner-size));
+    z-index: 10000; /* Put this bad boi on top of everything else */
+
+    border: 16px solid var(--color-seconday-darkened);
+    border-top: 16px solid var(--color-accent-brightened);
+    border-bottom: 16px solid var(--color-accent-brightened);
+    border-radius: 50%; /* Circle */
+    width: var(--spinner-size);
+    height: var(--spinner-size);
+    animation: spin 2s linear infinite;
+}
+
+.loader.hide {
+    display: none;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+@keyframes spin {
+    0% {transform: rotate(0deg);}
+    100% {transform: rotate(360deg);}
+}
+
+
