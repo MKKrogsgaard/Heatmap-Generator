@@ -121,13 +121,30 @@ body{
 #map {
     text-align: center;
     font-weight: 100;
-    text-transform: uppercase;
     color: var(--color-primary);
     margin: auto;
     position: sticky;
     top: 50%;
     height: 400px;
     width: 620px;
+}
+
+/* Site info list */
+#siteinfo-list {
+    --height: 360px;
+    --width: 300px;
+
+    height: var(--height);
+    width: var(--width);
+
+    /* Centering */
+    position: absolute;
+    top: calc(50% - 0.5*var(--height));
+    left: calc(50% - 0.55*var(--width));
+    text-align: left;
+}
+li {
+  margin: 10px 0;
 }
 
 /* Single-line footer */
