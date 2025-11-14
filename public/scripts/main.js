@@ -94,6 +94,8 @@ function submitFiles(input) {
  * @param {<Array>} points - An array of [lat, long, intensity] points for the heatmap
  */
 function makeHeatMap(points) {
+    // Remove the text behind the map
+    document.getElementById('map').innerHTML = "";
 
     if (!Array.isArray(points) || points.length == 0) {
         console.error('makeHeatMap: No points provided, or points not an Array!');
