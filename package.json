@@ -21,6 +21,7 @@
     "@types/node": "^24.10.0",
     "express": "^5.1.0",
     "fit-file-parser": "^1.21.0",
+    "gpx-parser-builder": "^1.1.1",
     "multer": "^2.0.2",
     "path": "^0.12.7"
   }
