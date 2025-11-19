@@ -79,7 +79,7 @@ function submitFiles(input) {
         });
         // For debugging
         percentage_valid = validPoints.length / (validPoints.length + invalidPoints.length) * 100
-        console.log(`Number of valid points: ${validPoints.length} (${percentage_valid}%)`);
+        console.log(`Number of valid points: ${validPoints.length} out of ${validPoints.length + invalidPoints.length} (${percentage_valid}%)`);
 
         // Make the heatmap with the valid points
         makeHeatMap(validPoints);

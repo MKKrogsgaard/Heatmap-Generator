@@ -69,7 +69,6 @@ function getFitPoints(data) {
                     });
                 } else {
                     console.warn("A FIT record had undefined position values!");
-                    console.log(`lat/long: ${record.position_lat}/${record.position_long}`)
                 }
             }
         }
