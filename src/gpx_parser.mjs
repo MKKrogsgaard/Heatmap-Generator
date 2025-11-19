@@ -28,26 +28,35 @@ function parseGpxFile(filepath) {
 
 /**
  * 
- * @param {<object>} data A (raw) parsed GPX file produced by parseGpxFile()
- * @returns {<Array>{lat:number, long:number, timestamp?:string, altitude?: number}} Array containing the GPS points 
+ * @param {object} data A (raw) parsed GPX file produced by parseGpxFile()
+ * @returns {Array{lat:number, long:number, timestamp?:string, altitude?: number}} Array containing the GPS points 
  */
 function getGpxPoints(data) {
+    /* 
+    The gps points we are interested in are located in 
+    [tracks] -> {track} -> [segments] -> {segment} -> [waypoints] -> {waypoint}
+
+    The structure of the parsed data is confusing AF 
+    TODO: Include some kind of illustration of the structure in the repo?
+    */
+
     const points = [];
     const tracks = data.trk;
     
-    for (const track of data.trk) {
+    for (const track of tracks) {
         const segments = track.trkseg;
         for (const segment of segments) {
             // Add the points if they are present in the current segment
-            const trackpoint = segment.trkpt;
-            if (trackpoint) {
-                console.log(trackpoint);
-                points.push({
-                    lat: trackpoint['$'].lat,
-                    long: trackpoint['$'].lon,
-                    timestamp: trackpoint.time,
-                    altitude: trackpoint.ele
-                });
+            const waypoints = segment.trkpt;
+            for (const waypoint of waypoints) {
+                if (typeof waypoint.$.lat !== 'undefined' && typeof waypoint.$.long !== 'undefined') { // Make sure the current record actually contains position data
+                    points.push({
+                        lat: waypoint.$.lat,
+                        long: waypoint.$.lon,
+                        timestamp: waypoint.time || null,
+                        altitude: waypoint.ele || null
+                    });
+                }
             }
         }
     }
