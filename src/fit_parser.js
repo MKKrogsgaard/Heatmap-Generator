@@ -41,16 +41,16 @@ function parseFitFile(filepath) {
 }
 /**
  * Takes in a raw parsed FIT file and returns an array containing all of the points in the GPS records of that file (i.e. a point-for-point record of the route the user took)
- * @param {<object>} data A (raw) parsed FIT file produced by parseFitFile()
- * @returns {<Array>{lat:number, long:number, timestamp?:string, altitude?: number}} Array containing GPS points
+ * @param {object} data A (raw) parsed FIT file produced by parseFitFile()
+ * @returns {Array{lat:number, long:number, timestamp?:string, altitude?: number}} Array containing GPS points
  */
 function getFitPoints(data) {
     /* 
     The gps points we are interested in are located in 
-    {data} -> {activity} -> [sessions] -> {ith session} -> [laps] -> {jth lap}
+    {data} -> {activity} -> [sessions] -> {session} -> [laps] -> {lap} -> [records] -> {record}
 
     The structure of the parsed data is confusing AF 
-    TODO: Include some kind of illustration of the structure in the repo
+    TODO: Include some kind of illustration of the structure in the repo?
     */
     const points = [];
     sessions = data.activity.sessions;
