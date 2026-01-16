@@ -6,6 +6,11 @@ Garmin uses FIT files while Strava uses GPX files, so this heatmap generator sho
 
 I made this because I couldn't be arsed to pay for a Strava subscription, but I think the heatmap is cool :)
 
+A screenshot of the application with an example heatmap is shown below:
+
+<img width="649" height="920" alt="image" src="https://github.com/user-attachments/assets/eb07bb20-3e96-48c0-abb7-da41037b1189" />
+
+
 # Instructions
 
 1. Make sure you have `node.js` and `npm` installed.
