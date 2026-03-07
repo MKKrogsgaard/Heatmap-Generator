@@ -68,7 +68,7 @@ $(document).ready(function(){
                 if (!result.ok) {
                     throw new Error('Failed to fetch the file at ' + filepath);
                 }
-                const blob = await result.blob(); // Gotta figure out what< 1 this is at some point
+                const blob = await result.blob(); // Gotta figure out what this is at some point
                 const file = new File([blob], filepath, {type: blob.type});
                 dataTransfer.items.add(file);
             }
